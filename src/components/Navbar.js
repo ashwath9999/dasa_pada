@@ -4,7 +4,7 @@ import {Link } from "react-router-dom"
 function Navbar() {
   return (
     <div>
-      <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-success">
+      <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-success mx-3">
         <div className="container-fluid " style={{ height: "30px" }}>
           <a className="navbar-brand" >
             <img
@@ -14,13 +14,13 @@ function Navbar() {
               height="24"
               className="d-inline-block align-text-top mx-3"
             />
-            DASA-PADA{" "}
+            DASA-PADA 
           </a>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item active">
-              <Link className="nav-link active"  aria-current="page" to="/dasa_pada">HOME</Link>
+              <Link className="nav-link "  aria-current="page" to="/dasa_pada">HOME</Link>
               </li>
               <li className="nav-item">
               <Link className="nav-link "  aria-current="page" to="/add">ADD</Link>

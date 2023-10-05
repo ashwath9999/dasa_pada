@@ -4,7 +4,8 @@ import { getDocs } from "firebase/firestore";
 function List({ padaCollectionRef,songs,setsongs }) {
 
   const [s_pada, sets_pada] = useState([]);
- 
+  const [search_pada, setSearch_pada] = useState('');
+
   const selected_pada = (s) => {
     var index = songs.findIndex((songs) => songs.id === s);
     sets_pada(songs[index]);
@@ -19,18 +20,25 @@ function List({ padaCollectionRef,songs,setsongs }) {
     setsongs(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
+  const search_padas = (s)=>{
+    if(s!==''){
+     // console.log('in function  '+ s);
+     setsongs(songs.filter(e=>e.title.toLowerCase().startsWith(s)));
+    }else{
+      populate_data_from_firebase();
+    //  console.log('nothing to search');
+    }
+  }
+
   return (
     <div className="container-fluid my-3">
       <div className="row flex-md-nowrap">
         <div className="col-12 col-sm-3 col-md-4 mx-1 bd-sidebar">
-          <form className="d-flex" role="search">
             <input
               className="form-control me-2 mx-1"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
+              placeholder="Search by name"
+              onChange={(e)=>search_padas(e.target.value)}
             />
-          </form>
 
           <div
             className="container bg-light my-2 mx-1 overflow-y-scroll border border-dark-subtle"

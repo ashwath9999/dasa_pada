@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { doc,deleteDoc,getDocs } from "firebase/firestore";
 
-export default function Del({ padaCollectionRef,db,showalert, songs,setsongs }) {
+export default function Del({ padaCollectionRef,db,showalert }) {
   const [show, setShow] = useState(false);
   const [mypass, setMypass] = useState();
+  const [songs, setSongs] = useState([]);
 
   const handleSubmit = () => {
     if (mypass === "ashu") {
@@ -15,11 +16,21 @@ export default function Del({ padaCollectionRef,db,showalert, songs,setsongs }) 
     }
   };
 
+
+  useEffect(() => {
+    populate_data_from_firebase();
+  }, []);
+
+  const populate_data_from_firebase = async () => {
+    const data = await getDocs(padaCollectionRef);
+    setSongs(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+
+
   const delete_song = async (id)=>{
     const padaDoc = doc(db,"padas",id);
     await deleteDoc(padaDoc);
-    const data = await getDocs(padaCollectionRef);
-    setsongs(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    populate_data_from_firebase();
   }
 
   return (

@@ -43,8 +43,6 @@ function App() {
               db={db}
               padaCollectionRef={padaCollectionRef}
               showalert={show_alert}
-              songs={songs} 
-              setsongs={setsongs}
               />}></Route>
               <Route
                 exact
